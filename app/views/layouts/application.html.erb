@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+  </head>
+
+  <body >
+    <header class="masthead" style="background-image: url('<%= coverimage(yield(:img)) %>');height: 450px;">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto" style="color: #ffffff;margin-top: 15%;text-align: center;text-shadow: 2px 2px 5px black">
+            <div class="site-heading" >
+              <h1><%= title_post(yield(:titlepost)) %></h1>
+              <span class="subheading" ><%= string(yield(:string)) %><span class="poster">
+             
+                  <%= link_to poster(yield(:poster)) %>
+                  <%= userid(yield(:user)) %>
+            
+                </span><%= date(yield(:date)) %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+  <!-- ------------------------------------Navbar---------------------------------- -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+      <div class="container" style="font-size: 20px;font-weight: 600">
+      	<div class="row">
+    		<div class="col">
+        		<%= link_to 'My Blog', root_url, class: "navbar-brand", style:"font-size: 20px;font-weight: 600;" %>
+        	</div>
+        </div>
+
+        <div class="row">
+    		<div class="col">
+         
+            <%= form_tag home_search_path, class: "form-inline my-2 my-lg-10", :method => 'get' do %>
+             <div class="row">
+            <div class="col-lg-12">
+              <%= text_field_tag :search, params[:search], placeholder: "Enter name content", class: 'form-control mr-sm-2' %>
+             </div>
+             </div>
+              <%= button_tag 'Search', class: 'btn btn-outline-success my-2 my-sm-0',style:"font-weight: 600;", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i> Searching..."} %>
+            <% end %>
+    </div>
+</div>
+	<div class="row">
+    	<div class="col">
+	        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	          Menu
+	          <i class="fa fa-bars"></i>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarResponsive">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	              <%= link_to 'Home', root_url, class: "nav-link" %>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="/home/about">About</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="/home/contact">Contact</a>
+	            </li>
+	            <% if user_signed_in? %>
+	            <li class="nav-item dropdown">
+	              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                Account
+	              </a>
+	              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	                
+	                    <% if current_user.role == "admin" %>
+	                      <%= link_to 'Post Management', posts_path, class: "dropdown-item" %>
+	                      <%= link_to 'User Management', users_path, class: "dropdown-item" %>
+	                    <% else %>
+	                      <%= link_to 'Post Management', posts_path, class: "dropdown-item" %>
+	                    <% end %>
+	                    <%= link_to 'Change Password', edit_user_registration_path, class: "dropdown-item" %>
+	                    <%= link_to 'Profile', users_path, class: "dropdown-item" %>
+	                    <%= link_to 'Edit profile', edit_user_path(current_user), class: "dropdown-item" %>
+	                    <div class="dropdown-divider"></div>
+	                      <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+	                    </div>
+	                  <% else %>
+	                    <!--<%= link_to 'Sign up', new_user_registration_path, class: "dropdown-item" %>-->
+	                    <!-- <%= link_to 'Log in',  new_user_session_path, class: "dropdown-item" %>-->
+	                  
+	            </li>
+	            <% end %>
+	          </ul>
+	          
+        </div>
+    </div>
+</div>
+
+      </div>
+
+    </nav>
+
+  	<div class="container" >
+
+<!---------------------------- Phần thân web-------------------------->
+      <%= yield %>
+      <!-- --------------------------Các cảnh báo và thông báo-------------------------------- -->
+      <div class="row">
+  			<div class="col-sm-8" style="text-align: center;margin-left: 16%">
+				<% if notice %>
+		  			<p class="alert alert-success"><%= notice %></p>
+				<% end %>
+				<% if alert %>
+		  			<p class="alert alert-danger"><%= alert %></p>
+				<% end %>
+			</div>
+		</div>
+        
+    </div>
+<!-- -------------------------footer--------------------- -->
+    <footer style="padding: 2%">
+    	<hr>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                  
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                   
+                    <i class="fab fa-facebook"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                 
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted" style="text-align: center;">Copyright &copy; Hắc Đế 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

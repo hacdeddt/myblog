@@ -1,0 +1,47 @@
+
+
+<%= form_for @comment do |form| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="form-group">
+  <div class="row">
+    <div class="col">
+      <%= form.text_field :email, id: :comment_email, placeholder:"Enter Your Email", class: "form-control" %>
+    </div>
+    <div class="col">
+      <%= form.text_field :name, id: :comment_name, placeholder:"Enter Your Name", class: "form-control" %>
+    </div>
+  </div>  
+</div>  
+<div class="form-group">
+  <div class="field">
+    <%= form.text_area :content, id: :comment_content, rows: 3, placeholder:"Enter a content...", class: "form-control" %>
+  </div>
+</div>
+
+  <div class="field">
+   
+    <%= form.hidden_field :post_id, id: :comment_post_id %>
+  </div>
+
+  <div class="field">
+   
+    <%= form.hidden_field :parents_id, id: :comment_parents_id %>
+  </div>
+<div class="form-group">
+  <div class="actions" style="text-align: center;">
+    <%= form.button 'Add Comment', class: "btn btn-success btn-block", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i> Adding ..."} %>
+  </div>
+</div>
+<% end %>
+
+

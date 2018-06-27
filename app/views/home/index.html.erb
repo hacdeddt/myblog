@@ -1,0 +1,102 @@
+<body class="backgroundbody">
+<!-- --------------Danh sách bài viết theo Năm---------------- -->
+  <div class="float-right listtag" >
+
+		<ul class="list-group list-group-flush" style="border: 1px solid #6996;border-radius: 5px;background-color: #ffffff;">
+			<strong style="padding: 5%;background: #D8D8D8;border-top-right-radius: 4px; border-top-left-radius: 4px; ">Danh Mục Bài Viết Theo Năm</strong>
+			
+					
+					<% @posts.each do |p| %>
+			  		<li class="list-group-item">
+			  			<a href="/home/year?year=<%= p %>">
+			  				<i class="far fa-calendar-alt"> <%= p %></i>	
+			  			</a>
+			  		</li>
+					<% end %>
+		
+		</ul>
+
+
+	
+	
+
+
+	<!-- --------------Danh sách bài viết theo tag---------------- -->
+		<div style="margin-top: 8%;">
+		<ul class="list-group list-group-flush" style="border: 1px solid #6996;border-radius: 5px;">
+			<strong style="padding: 5%;background: #D8D8D8;border-top-right-radius: 4px; border-top-left-radius: 4px; ">Danh Mục Bài Viết Theo Tag</strong>
+			<% @tags.each do |tag| %>
+		  <li class="list-group-item"><a href="/home/tag?tag=<%= tag.tagname %>"><%= tag.tagname %></a></li>
+		  	<% end %>
+		</ul>
+		</div>
+	</div>
+
+
+	
+<!-- --------------------------------------Bài đăng mới ---------------------------------->
+	<div class="container">
+
+		<div class="row">
+			<div class="col-sm-12">
+<div style="margin-top: 3%"></div>
+	
+<div class="vienkhung" style="background-color: #ffffff;">	
+	<div class="media">
+	  <div class="media-body">
+	    <h4 class="mt-0"><%= link_to 'New Posts',home_postnew_path %></h4>
+	    <div class="thutvao">
+		    <% @postdesc.each do |post| %>
+		    <div class="media mt-3">
+		    	
+			      <a class="pr-3" href="/home/<%= post.slug %>">
+			        <%= image_tag(post.image,width: 150, height: 150, class: "mr-3")%>
+			      </a>
+			      <div class="media-body">
+			        <h5 class="mt-0"><a class="pr-3" href="/home/<%= post.slug %>"><%= post.title %></a></h5>
+			        <%= truncate(post.summary,length:250) %> <a href="/home/<%= post.slug %>"> Read more</a>
+			      </div>
+			    
+	   		</div>
+	    <% end %>
+	</div>
+	<a class="floatright" href="/home/postnew"><h5>See More</h5></a>
+	  </div>
+
+	</div>
+	
+</div>
+<!-- --------------------------------------Bài đăng cũ ---------------------------------->	
+<div style="margin-top: 3%"></div>
+<div class="vienkhung" style="background-color: #ffffff;">	
+	<div class="media">
+	  <div class="media-body">
+	  	
+	    <h4 class="mt-0"><%= link_to 'Old Posts',home_postold_path %></h4>
+	    <div class="thutvao">
+		    <% @postasc.each do |post| %>
+		    <div class="media mt-3">
+		    	
+			      <a class="pr-3" href="/home/<%= post.slug %>">
+			        <%= image_tag(post.image,width: 150, height: 150, class: "mr-3")%>
+			      </a>
+			      <div class="media-body">
+			        <h5 class="mt-0"><a class="pr-3" href="/home/<%= post.slug %>"><%= post.title %></a></h5>
+			        <%= truncate(post.summary,length:250) %> <a href="/home/<%= post.slug %>"> Read more</a>
+			      </div>
+			    
+		    </div>
+		    <% end %>
+		   </div>
+		  <a class="floatright" href="/home/postold"><h5>See More</h5></a>
+	  </div>
+	  
+	</div>
+	
+</div>
+</div>
+</div>
+</div>
+
+
+</body>

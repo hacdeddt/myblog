@@ -1,0 +1,47 @@
+<div class="container">
+<%= render 'home/hellouser' %>
+
+<div class="margintop">
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th scope="row">Title: </th>
+      <td><h3 style="color: blue;"><%= @post.title %></h3></td>
+    </tr>
+    <tr>
+      <th scope="row">Content: </th>
+      <td><%= raw @post.content %></td>
+    </tr>
+    <tr>
+      <th scope="row">Summary: </th>
+      <td><%= @post.summary %></td>
+    </tr>
+    <tr>
+      <th scope="row">Image: </th>
+      <td><%= image_tag(@post.image, width: 400) if @post.image.present? %></td>
+    </tr>
+    <tr>
+      <th scope="row">Publish: </th>
+      <td><%= @post.publish %></td>
+    </tr>
+    <tr>
+      <th scope="row">Slug: </th>
+      <td><%= @post.slug %></td>
+    </tr>
+    <tr>
+      <th scope="row">Tags: </th>
+      <td><%= @post.all_tags %></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<hr>
+<div class="container">
+  <div class="floatright">
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Back', posts_path %>
+  </div>
+</div>
+</div>
+

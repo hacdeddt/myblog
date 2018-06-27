@@ -1,0 +1,77 @@
+
+
+  <%= form_with(model: post, local: true) do |form| %>
+  <div class="container backgroundwhite">
+    <% if post.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :title %> (<span style="color: red">*</span>)
+      <%= form.text_field :title, id: :post_title, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :content %> (<span style="color: red">*</span>)
+      <%= form.cktext_area :content, id: :post_content,  class: "form-control" %>
+    </div>
+  </div>
+
+<div class="form-group">
+  <div class="field">
+    <%= form.label :summary %> (<span style="color: red">*</span>)
+    <%= form.text_area :summary, id: :post_summary, rows: 5, class: "form-control" %>
+  </div>
+</div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :image %>
+      <%= form.file_field :image, id: :post_image, class: "form-control-file" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :tags %>
+      <%= form.text_area :all_tags, rows: 5, class: "form-control" %>
+    </div>
+    <span class="form-text text-muted">(<span style="color: red">*</span>) Lưu ý định dạng của Tag sau dấu phẩy phải có space, ví dụ: tag1, tag2, tag3</span>
+  </div>
+  <%= form.hidden_field :year %>
+
+  <div class="form-group form-check">
+    <div class="field">
+      
+      <%= form.check_box :publish, id: :post_publish,class: "form-check-input" %>
+      <%= form.label :publish, class: "form-check-label" %>
+    </div>
+     <span class="form-text text-muted">(<span style="color: red">*</span>) Lưu ý: Nếu muốn lưu nháp thì không được tích vào ô <span style="color: blue">Publish</span>. <br> Các trường (<span style="color: red">*</span>) không được để trống.</span>
+
+  </div>
+
+
+  </div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.hidden_field :user_id, id: :post_user_id, value: current_user.id %>
+    </div>
+  </div>
+
+    <div class="actions" style="text-align: center;">
+        <%= form.button 'Submit', class: "btn btn-primary", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i> Submitting..."} %>
+    </div>
+    </div>
+  <% end %>
+

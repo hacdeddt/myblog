@@ -1,0 +1,149 @@
+<% provide(:titlepost,@post.title) %>
+<% provide(:string,@user.username) %>
+<% provide(:poster,@user.username) %>
+<% provide(:date,time_ago_in_words((@post.created_at), include_seconds: true)) %>
+<% provide(:img,@post.image) %>
+<body class="backgroundbody">
+	<div class="container" >
+		<div class="row" >
+			<div class="col-sm-11" style="background-color: #ffffff;padding-top: 3%; border-radius: 5px;">
+				<div class="margintop">
+					<p><%= raw @post.content %></p>
+				</div>
+				<hr>
+				<p><strong>Tags: </strong> <% @tags.each do |tag| %> 
+							<a style="font-size: 15px;" class="badge badge-secondary" href="/home/tag?tag=<%= tag %>"><%= tag %></a>
+						<%end %>
+				</p>
+						<hr>
+<!-- ---------------------------Đề xuất Bài viết liên quan--------------- -->
+		<p><strong>Bài viết liên quan:</strong>
+				<% @arr1.each do |id| %>
+					<% if (@post.id != id )%>
+					    <p><% Post.where(["publish = ? and id = ?",true,id]).ids.each do |f| %></p>
+					     <div class="media mt-3">     					
+					        <a class="pr-3" href="/home/<%= Post.find(f).slug %>">
+						        <%= image_tag(Post.find(f).image,width: 100, height: 100, class: "mr-3")%>
+						      </a>
+						      <div class="media-body">
+						        <h5 class="mt-0"><a class="pr-3" href="/home/<%= Post.find(f).slug %>"><%= Post.find(f).title %></a></h5>
+						        <%= truncate(Post.find(f).summary,length:200) %> <a href="/home/<%= Post.find(f).slug %>"> Read more</a>
+						      </div>
+						   </div>
+
+						<%end %>
+					<%end %>
+				<%end %>
+			</p>
+			<hr>
+<!-- ------------------------------comment----------------- -->
+<div id="comments">
+	<h2><%= @commentsize %> Comments</h2>
+			<!-- Contenedor Principal -->
+		    <div class="comments-container">
+			
+				<ul id="comments_list" class="comments-list">
+					<% @comments.each do |comment|%>
+						<li>
+						<div class="comment-main-level">
+							<!-- Avatar -->
+						
+							<!-- Contenedor del Comentario -->
+				<div class="comment-box">
+					<div class="comment-head">
+<h6 class="comment-name">
+	
+		<%= comment.name if comment.name.present? %> <%= comment.email if comment.email.present? %>			
+</h6>
+<span><%= time_ago_in_words(comment.created_at) %> ago</span>
+			
+							<% if user_signed_in? %>
+						<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/comments/<%= comment.id %>"><i class="far fa-trash-alt"></i></a>
+					<% end%>
+								<i class="reply fa fa-reply" comment="<%= comment.id %>"></i>
+							
+					</div>
+								<div class="comment-content">
+									<%= raw comment.content %>
+
+								</div>
+<div id="replyform_<%= comment.id %>" style="display: none;">
+	<hr>
+	<%= render partial: "comments/formrep", locals: { c: comment }  %>
+
+</div>								
+								
+				</div>
+
+
+			</div>
+
+<!----------------------------------- Comment con----------------------- -->
+						<!-- Respuestas de los comentarios -->
+			<% @parencomment = @post.comments.where(["parents_id = ?",comment.id]).order("created_at ASC") %>
+					<% @parencomment.each do |pc| %>
+						<ul class="comments-list reply-list">
+							<li>
+			
+				
+					
+								<!-- Contenedor del Comentario -->
+								<div class="comment-box">
+									<div class="comment-head">
+										<h6 class="comment-name">
+											<%= pc.name %> 
+											<%= pc.email %>				
+										</h6>
+										<span><%= time_ago_in_words(pc.created_at) %> ago</span>
+			<% if user_signed_in? %>
+						<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/publish/<%= pc.id %>"><i class="far fa-trash-alt"></i></a>
+					<% end%>
+									
+								
+									</div>
+									<div class="comment-content">
+										<%= raw pc.content %>
+									</div>
+								</div>
+					
+			
+							</li>
+
+						</ul>
+						<% end %>
+ 
+					</li>
+					<%end%>
+				</ul>
+				<div style="margin-top: 2%;width: 100%">
+			      <nav aria-label="Page navigation example">
+			        <ul class="pagination">
+			        
+			          <li class="page-item" style="font-size: 18px;" ><%= will_paginate @comments, previous_label: 'Previous', next_label: 'Next', class: 'link' %></li>
+			        </ul>
+			      </nav>
+      
+  				</div>
+	</div>
+		
+	
+	<hr />
+<p>
+	<h3>Add a comment: </h3>
+	<%= render partial: "comments/form", locals: { comment: @comment }  %>		
+  		
+</p>
+</div>
+				
+
+
+
+
+
+
+
+								
+			</div>
+		</div>
+	</div>
+</body>

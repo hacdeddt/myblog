@@ -1,0 +1,56 @@
+<div style="margin-top: 2%">
+  <a style="font-size: 14px;" class="badge badge-pill badge-warning" href="/publish/index?publish=0">Draft Posts (<%= @d %>)</a> | 
+  <a style="font-size: 14px;" class="badge badge-pill badge-info" href="/publish/index?publish=1">Published Posts (<%= @p %>)</a>
+
+</div>
+
+<%= render 'home/hellouser' %>
+
+
+  <div style="background-color: #ffffff; border-radius: 5px; margin-left: -5%; padding-left: 1%;margin-right: -4%; padding-right: 1%;" >
+  <h1 style="text-align: center;">Posts</h1>
+
+  <p id="notice"><%= notice %></p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+        <th scope="col">Summary</th>
+        <th scope="col">Image</th>
+        <th scope="col">Publish</th>
+        <th scope="col" colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.title %></td>
+          <td><%= truncate(post.content, length: 250) %></td>
+          <td><%= truncate(post.summary,length: 100) %></td>
+          <td><%= image_tag(post.image_url, width: 200) if post.image.present? %></td>
+          <td><%= post.publish %></td>
+          <td><%= link_to 'Show', post %></td>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <div style="margin-top: 2%;width: 100%">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+          
+            <li class="page-item" style="font-size: 20px;" ><%= will_paginate @posts, previous_label: 'Previous', next_label: 'Next', class: 'link' %></li>
+          </ul>
+        </nav>
+        
+    </div>
+
+  <%= link_to 'New Post', new_post_path, class: "floatright" %>
+  </div>
+
+

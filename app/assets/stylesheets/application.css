@@ -1,0 +1,121 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.poster:hover
+{
+	text-decoration: underline;
+}
+.poster
+{
+	font-family: serif;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 20px;
+	color: #ffffff;
+}
+.post
+{
+	margin-top: 5%;
+	font-family: serif;
+	font-size: 20px;
+	margin-left: 13%;
+}
+.floatright
+{
+	float: right;
+}
+.margintop
+{
+	margin-top: 5%;
+	text-align: center;
+	margin-bottom: 2%;
+}
+.marginleft
+{
+	margin-left: 12%;
+}
+.thutvao
+{
+	margin-left: 5%;
+	margin-top: 2%;
+}
+.vienkhung
+{
+	border: 1px solid #6996;
+	padding: 3%;
+	border-radius: 5px;
+	margin-left: -5%;
+}
+.backgroundwhite
+{
+	background-color: #ffffff;
+	margin: -7%;
+	padding: 6%;
+	
+	border-radius: 5px;
+}
+.backgroundbody
+{
+	background-color: #e9eaed;
+	z-index: -1;
+}
+.listtag
+{
+
+	width: 25%; 
+	margin-top: 2.3%;
+	margin-right: -5%;
+}
+
+    .pb-cmnt-container {
+        font-family: Lato;
+        margin-top: 100px;
+    }
+
+    .pb-cmnt-textarea {
+        resize: none;
+        padding: 20px;
+        height: 130px;
+        width: 100%;
+        border: 1px solid #F2F2F2;
+    }
+
+.panel {
+	position:relative;
+}
+.panel>.panel-heading:after,.panel>.panel-heading:before{
+	position:absolute;
+	top:11px;left:-16px;
+	right:100%;
+	width:0;
+	height:0;
+	display:block;
+	content:" ";
+	border-color:transparent;
+	border-style:solid solid outset;
+	pointer-events:none;
+}
+.panel>.panel-heading:after{
+	border-width:7px;
+	border-right-color:#f7f7f7;
+	margin-top:1px;
+	margin-left:2px;
+}
+.panel>.panel-heading:before{
+	border-right-color:#ddd;
+	border-width:8px;
+}
+

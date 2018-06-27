@@ -1,0 +1,37 @@
+ <body class="backgroundbody">
+
+
+  <!-- ------------------------------------------------------------------- -->
+ <div style="margin-top: 5%" >
+    <p id="notice"><%= notice %></p>
+<div class="row" style="background-color: #ffffff;padding-top: 3%; border-radius: 5px;">
+    <% @posts.each do |post| %>
+      <div class="col-sm-12">
+        
+          <div class="media">
+            <a href="/home/<%= post.slug %>">
+              <%= image_tag(post.image,width: 150, height: 150, class: "mr-3")%>
+            </a>
+              <div class="media-body">
+                <h5 class="mt-0"><a href="/home/<%= post.slug %>"><%= post.title %></a></h5>
+                <%= post.summary %> <a href="/home/<%= post.slug %>"> Read More</a>
+              </div>
+          </div>
+     
+      <hr>
+    </div>
+            
+       
+    <% end %>
+    <div style="margin-left: 45%;margin-top: 2%;width: 100%">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        
+          <li class="page-item" style="font-size: 20px;" ><%= will_paginate @posts, previous_label: 'Previous', next_label: 'Next', class: 'link' %></li>
+        </ul>
+      </nav>
+      
+  </div>
+</div>
+</div>
+</body>
