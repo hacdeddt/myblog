@@ -59,6 +59,8 @@ gem 'mini_magick'
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 gem 'jquery-rails'
+
+gem 'rails_12factor', group: :production
 group :production do
   gem 'pg'
 end
