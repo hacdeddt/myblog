@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180625072519) do
     t.string "name"
     t.string "content"
     t.integer "post_id"
-    t.integer "parents_id"
+    t.integer "parents_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
