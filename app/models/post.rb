@@ -16,7 +16,7 @@ class Post < ApplicationRecord
 	end
 	def transyear
 		begin
-			self.year = self.created_at.year
+			self.year = Time.now.year
 		rescue
 			
 		end
