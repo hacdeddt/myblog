@@ -48,7 +48,7 @@
     </div>
     <span class="form-text text-muted">(<span style="color: red">*</span>) Lưu ý định dạng của Tag sau dấu phẩy phải có space, ví dụ: tag1, tag2, tag3</span>
   </div>
-  <%= form.hidden_field :year %>
+  <%= form.hidden_field :year, value: Time.now.year %>
 
   <div class="form-group form-check">
     <div class="field">

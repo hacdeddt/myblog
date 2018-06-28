@@ -7,20 +7,14 @@ class Post < ApplicationRecord
 	validates :title, presence: true
 	validates :content, presence: true
 	validates :summary, presence: true
-	before_validation :sanitize, :slugify, :transyear
+	before_validation :sanitize, :slugify
 	def slugify
 		self.slug = self.title.downcase.gsub(" ","-")
 	end
 	def sanitize
 		self.title = self.title.strip
 	end
-	def transyear
-		begin
-			self.year = Time.now.year
-		rescue
-			
-		end
-	end
+
 	
 #Thêm tag và posttag
 
