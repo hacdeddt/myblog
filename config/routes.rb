@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :posttags
     mount Ckeditor::Engine => '/ckeditor'
-    resources :tags
+    resources :tags, :path => 'blog/tags'
     resources :posts, :path => 'blog/posts'
     get 'home/index'
 
