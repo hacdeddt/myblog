@@ -63,10 +63,10 @@ class HomeController < ApplicationController
 
   end
   def tag
-    @posts = Post.tagged_with(params[:tag]).where(["publish = ? ",true]).paginate(page: params[:page],per_page: 7)
+    @posts = Post.tagged_with(params[:tag]).where(["publish = ? ",true]).paginate(page: params[:page],per_page: 8)
   end
   def year
-    @posts = Post.where(["publish = ? and year(created_at) = ?", true, params[:year]]).paginate(page: params[:page],per_page: 8)
+    @posts = Post.where(["publish = ? and year = ?", true, params[:year]]).paginate(page: params[:page],per_page: 8)
   end
   private
   def set_post

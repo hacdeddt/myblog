@@ -5,6 +5,8 @@
 <table>
   <thead>
     <tr>
+      <th>Post ID:</th>
+      <th>Tag ID:</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +14,8 @@
   <tbody>
     <% @posttags.each do |posttag| %>
       <tr>
+        <td><%= posttag.post_id %></td>
+        <td><%= posttag.tag.id %></td>
         <td><%= link_to 'Show', posttag %></td>
         <td><%= link_to 'Edit', edit_posttag_path(posttag) %></td>
         <td><%= link_to 'Destroy', posttag, method: :delete, data: { confirm: 'Are you sure?' } %></td>

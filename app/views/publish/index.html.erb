@@ -1,6 +1,7 @@
 <div style="margin-top: 2%">
   <a style="font-size: 14px;" class="badge badge-pill badge-warning" href="/publish/index?publish=0">Draft Posts (<%= @d %>)</a> | 
-  <a style="font-size: 14px;" class="badge badge-pill badge-info" href="/publish/index?publish=1">Published Posts (<%= @p %>)</a>
+  <a style="font-size: 14px;" class="badge badge-pill badge-info" href="/publish/index?publish=1">Published Posts (<%= @p %>)</a> |
+  <%= link_to 'New Post', new_post_path, class: "badge badge-pill badge-success",style: "font-size: 14px;"  %>
 
 </div>
 
