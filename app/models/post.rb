@@ -20,7 +20,7 @@ class Post < ApplicationRecord
 
 	def all_tags=(names)
 		self.tags = names.split(', ').map do |name| 
-			Tag.where(tagname: name).first_or_create
+			Tag.where(tagname: name.capitalize).first_or_create
 		end
 	end
 
