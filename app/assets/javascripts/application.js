@@ -22,7 +22,7 @@
 //       $('#comments-section').toggle()
 
 
-$(document).ready(function(){
+$(document).on('turbolinks:load', function() {
 	$('.reply').click(function(){
 	const cmdId = $(this).attr("comment");
 	if ($('#replyform_'+cmdId).css('display')== 'none')
