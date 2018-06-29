@@ -1,7 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-require 'base64'
-  i = Base64.decode64("VGhhbmgxMjMh")
   # Code is not reloaded between requests.
   config.cache_classes = true
 
