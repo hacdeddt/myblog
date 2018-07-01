@@ -23,7 +23,7 @@
 					    <p><% Post.where(["publish = ? and id = ?",true,id]).ids.each do |f| %></p>
 					     <div class="media mt-3">     					
 					        <a class="pr-3" href="/home/<%= Post.find(f).slug %>">
-						        <%= image_tag(Post.find(f).image,width: 100, height: 100, class: "mr-3")%>
+						        <%= image_tag(Post.find(f).image,width: 100, height: 100, class: "mr-3", alt: 'The Picture')%>
 						      </a>
 						      <div class="media-body">
 						        <h5 class="mt-0"><a class="pr-3" href="/home/<%= Post.find(f).slug %>"><%= Post.find(f).title %></a></h5>
@@ -96,7 +96,7 @@
 										</h6>
 										<span><%= time_ago_in_words(pc.created_at) %> ago</span>
 			<% if user_signed_in? %>
-						<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/publish/<%= pc.id %>"><i class="far fa-trash-alt"></i></a>
+						<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/publish/<%= pc.id %>" ><i class="far fa-trash-alt"></i></a>
 					<% end%>
 									
 								

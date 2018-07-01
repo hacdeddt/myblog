@@ -8,6 +8,7 @@ class PublishController < ApplicationController
   def destroy
       @comment.destroy
     respond_to do |format|
+      format.js
       format.html { redirect_back(fallback_location: root_path) }
       format.json { head :no_content }
     end

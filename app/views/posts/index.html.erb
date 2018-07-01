@@ -32,7 +32,7 @@
           <td><%= truncate(post.summary,length: 100) %></td>
           <td><%= image_tag(post.image_url, width: 200, alt: "Picture") if post.image.present? %></td>
           <td><%= post.publish %></td>
-          <td><a href="/blog/posts/<%= post.id %>"><i class="far fa-eye"></i></a></td>
+          <td><a href="/home/<%= post.slug %>"><i class="far fa-eye"></i></a></td>
           <td><a href="/blog/posts/<%= post.id %>/edit"><i class="far fa-edit"></i></a></td>
        
           <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/blog/posts/<%= post.id %>"><i class="far fa-trash-alt"></i></a></td>

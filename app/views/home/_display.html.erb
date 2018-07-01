@@ -10,7 +10,7 @@
         
           <div class="media">
             <a href="/home/<%= post.slug %>">
-              <%= image_tag(post.image,width: 150, height: 150, class: "mr-3")%>
+              <%= image_tag(post.image,width: 150, height: 150, class: "mr-3", alt: 'Picture Thumbnail')%>
             </a>
               <div class="media-body">
                 <h5 class="mt-0"><a href="/home/<%= post.slug %>"><%= post.title %></a></h5>
